@@ -1,86 +1,56 @@
-📚 Sistema de Biblioteca em C
-Sistema simples de gerenciamento de biblioteca com persistência em arquivos
+**Sistema de Biblioteca em C**
+- Sistema simples de gerenciamento de biblioteca com persistência em arquivos.
 
-🎯 Funcionalidades
-Módulo	Recursos
-📖 Livros	Cadastro, listagem, controle de exemplares
-👥 Usuários	Cadastro com dados acadêmicos
-🔄 Empréstimos	Registro com datas automáticas
-💾 Dados	Salva automaticamente em arquivos .txt
-🚀 Como Usar
-▶️ Executar
-bash
-# Compilar
+**Funcionalidades**
+- Cadastro de livros
+
+- Cadastro de usuários
+
+- Registro de empréstimos
+
+- Listagem de dados
+
+- Salva automaticamente em arquivos .txt
+
+**Como Usar**
+- **Compilar e Executar:**
 gcc -o biblioteca main.c
-
-# Executar
 ./biblioteca
-📋 Menu Principal
-text
-1. Cadastrar Livro
-2. Cadastrar Usuário
-3. Registrar Empréstimo
-4. Listar Livros
-5. Listar Usuários
-6. Listar Empréstimos
-7. Salvar Backup
-0. Sair
-📁 Estrutura de Arquivos
-text
-biblioteca/
-├── main.c              # Código fonte
-├── biblioteca.exe      # Executável (Windows)
-├── livros.txt          # Dados dos livros (auto)
-├── usuarios.txt        # Dados dos usuários (auto)
-└── emprestimos.txt     # Dados de empréstimos (auto)
-⚙️ Requisitos
-Compilador C (GCC, MinGW, ou similar)
 
-Windows/Linux/Mac (compilado com GCC)
-
-🛠️ Compilação
-Dev-C++
+- **No Dev-C++:**
 Abra main.c
+Pressione F11 (Compile & Run)
 
-Execute → Compile & Run (F11)
 
-Terminal Linux/Mac
-bash
-gcc main.c -o biblioteca
-./biblioteca
-Prompt do Windows (MinGW)
-cmd
-gcc main.c -o biblioteca.exe
-biblioteca.exe
-🔧 Solução de Problemas
-❌ "for loop initial declarations"
-Solução: No Dev-C++, vá em:
+**Menu do Sistema**
+- Cadastrar Livro
+- Cadastrar Usuário
+- Cadastrar Empréstimo
+- Listar Livros
+- Listar Usuários
+- Listar Empréstimos
+- Salvar dados (backup)
+- Sair
 
-text
-Tools → Compiler Options → Adicione "-std=c99"
-❌ Arquivos .txt não são criados
-Solução: Execute como administrador ou verifique permissões da pasta
 
-❌ Dados desaparecem
-Solução: Use sempre a opção 7 (Salvar) antes de sair
 
-📸 Exemplo de Uso
-c
-// Cadastrando um livro:
-Código: 101
-Título: O Senhor dos Anéis
-Autor: J.R.R. Tolkien
-Ano: 1954
-Exemplares: 5
-✅ Livro cadastrado!
-📊 Dados Salvos
-Os arquivos usam formato simples:
+**Estrutura de Arquivos**
+- main.c - código fonte principal
 
-livros.txt
+- biblioteca.exe - executável
 
-text
-101;O Senhor dos Anéis;J.R.R. Tolkien;Martins;1954;5;0
-usuarios.txt
+- livros.txt - dados dos livros (gerado automaticamente)
 
-text
-2024001;João Silva;Computação;11999999999;25;3;2024
+- usuarios.txt - dados dos usuários (gerado automaticamente)
+
+- emprestimos.txt - dados de empréstimos (gerado automaticamente)
+
+**Formato dos Arquivos**
+- **livros.txt**
+codigo;titulo;autor;editora;ano;exemplares;status
+
+- **usuarios.txt**
+matricula;nome;curso;telefone;dia;mes;ano
+
+- **emprestimos.txt**
+codigoEmprestimo;matriculaUsuario;codigoLivro;diaE;mesE;anoE;diaD;mesD;anoD;status
