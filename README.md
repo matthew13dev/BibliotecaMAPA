@@ -1,162 +1,86 @@
 📚 Sistema de Biblioteca em C
-Um sistema completo de gerenciamento de biblioteca desenvolvido em linguagem C, com persistência de dados em arquivos.
+Sistema simples de gerenciamento de biblioteca com persistência em arquivos
 
-🚀 Funcionalidades
-📖 Gestão de Livros
-Cadastro de livros (código, título, autor, editora, ano, exemplares)
-
-Listagem completa de acervo
-
-Controle de disponibilidade (status)
-
-👥 Gestão de Usuários
-Cadastro de usuários (matrícula, nome, curso, telefone, data de cadastro)
-
-Listagem de usuários registrados
-
-🔄 Gestão de Empréstimos
-Registro de empréstimos com data de retirada e devolução prevista
-
-Controle de empréstimos ativos
-
-Cálculo automático de data de devolução (7 dias após empréstimo)
-
-💾 Persistência de Dados
-Salvamento automático em arquivos texto
-
-Carregamento automático ao iniciar o programa
-
-Backup manual disponível
-
-🛠️ Como Compilar e Executar
-Pré-requisitos
-Compilador C (GCC recomendado)
-
-Dev-C++ ou Code::Blocks (opcional)
-
-Compilação Manual (Terminal)
+🎯 Funcionalidades
+Módulo	Recursos
+📖 Livros	Cadastro, listagem, controle de exemplares
+👥 Usuários	Cadastro com dados acadêmicos
+🔄 Empréstimos	Registro com datas automáticas
+💾 Dados	Salva automaticamente em arquivos .txt
+🚀 Como Usar
+▶️ Executar
 bash
+# Compilar
 gcc -o biblioteca main.c
+
+# Executar
 ./biblioteca
-No Dev-C++
-Abra o arquivo main.c
-
-Clique em Execute → Compile & Run (F11)
-
-📋 Menu do Sistema
+📋 Menu Principal
 text
-=== Sistema Biblioteca ===
-1 - Cadastrar Livro
-2 - Cadastrar Usuário
-3 - Cadastrar Empréstimo
-4 - Listar Livros
-5 - Listar Usuários
-6 - Listar Empréstimos
-7 - Salvar dados (backup)
-0 - Sair
+1. Cadastrar Livro
+2. Cadastrar Usuário
+3. Registrar Empréstimo
+4. Listar Livros
+5. Listar Usuários
+6. Listar Empréstimos
+7. Salvar Backup
+0. Sair
 📁 Estrutura de Arquivos
-Arquivos do Programa
-main.c - Código fonte principal
-
-biblioteca.exe - Executável (após compilação)
-
-Arquivos de Dados (gerados automaticamente)
-livros.txt - Cadastro de livros
-
-usuarios.txt - Cadastro de usuários
-
-emprestimos.txt - Registro de empréstimos
-
-📊 Formato dos Arquivos de Dados
-livros.txt
 text
-codigo;titulo;autor;editora;ano;exemplares;status
-1;Dom Casmurro;Machado de Assis;Editora A;1899;5;0
-usuarios.txt
+biblioteca/
+├── main.c              # Código fonte
+├── biblioteca.exe      # Executável (Windows)
+├── livros.txt          # Dados dos livros (auto)
+├── usuarios.txt        # Dados dos usuários (auto)
+└── emprestimos.txt     # Dados de empréstimos (auto)
+⚙️ Requisitos
+Compilador C (GCC, MinGW, ou similar)
+
+Windows/Linux/Mac (compilado com GCC)
+
+🛠️ Compilação
+Dev-C++
+Abra main.c
+
+Execute → Compile & Run (F11)
+
+Terminal Linux/Mac
+bash
+gcc main.c -o biblioteca
+./biblioteca
+Prompt do Windows (MinGW)
+cmd
+gcc main.c -o biblioteca.exe
+biblioteca.exe
+🔧 Solução de Problemas
+❌ "for loop initial declarations"
+Solução: No Dev-C++, vá em:
+
 text
-matricula;nome;curso;telefone;dia;mes;ano
-1001;João Silva;Engenharia;11999999999;15;10;2023
-emprestimos.txt
-text
-codigoEmprestimo;matriculaUsuario;codigoLivro;diaE;mesE;anoE;diaD;mesD;anoD;status
-5001;1001;1;20;10;2023;27;10;2023;0
-⚙️ Configurações Técnicas
-Limites do Sistema
-Máximo de 1000 livros
+Tools → Compiler Options → Adicione "-std=c99"
+❌ Arquivos .txt não são criados
+Solução: Execute como administrador ou verifique permissões da pasta
 
-Máximo de 1000 usuários
+❌ Dados desaparecem
+Solução: Use sempre a opção 7 (Salvar) antes de sair
 
-Máximo de 1000 empréstimos simultâneos
-
-Estruturas de Dados
+📸 Exemplo de Uso
 c
-typedef struct {
-    int codigo;
-    char titulo[100];
-    char autor[80];
-    char editora[60];
-    int ano;
-    int exemplares;
-    int status; // 0=disponível, 1=emprestado
-} Livro;
-🐛 Solução de Problemas Comuns
-Erro ao compilar: "for loop initial declarations"
-Configure o compilador para usar padrão C99:
+// Cadastrando um livro:
+Código: 101
+Título: O Senhor dos Anéis
+Autor: J.R.R. Tolkien
+Ano: 1954
+Exemplares: 5
+✅ Livro cadastrado!
+📊 Dados Salvos
+Os arquivos usam formato simples:
 
-Dev-C++: Tools → Compiler Options → Add "-std=c99"
-
-Dados não aparecem ao reiniciar
-Verifique se os arquivos .txt estão na mesma pasta do executável
-
-Erro ao abrir arquivos
-Certifique-se de que o programa tem permissão de escrita na pasta
-
-📝 Exemplo de Uso
-Cadastrar um livro:
+livros.txt
 
 text
-Código: 1
-Título: 1984
-Autor: George Orwell
-Editora: Companhia das Letras
-Ano: 1949
-Exemplares: 3
-Cadastrar um usuário:
+101;O Senhor dos Anéis;J.R.R. Tolkien;Martins;1954;5;0
+usuarios.txt
 
 text
-Matrícula: 1001
-Nome: Maria Santos
-Curso: Ciência da Computação
-Telefone: 11988887777
-Data de cadastro: 25 03 2024
-Registrar empréstimo:
-
-text
-Código do empréstimo: 5001
-Matrícula do usuário: 1001
-Código do livro: 1
-Data do empréstimo: 25 03 2024
-🔧 Melhorias Futuras
-Devolução de livros
-
-Consulta por título/autor
-
-Relatórios estatísticos
-
-Renovação de empréstimos
-
-Multas por atraso
-
-Interface gráfica
-
-Exportação para PDF/Excel
-
-👨‍💻 Autor
-Desenvolvido como projeto acadêmico de programação em C.
-
-📄 Licença
-Este projeto é para fins educacionais. Sinta-se à vontade para modificar e distribuir.
-
-💡 Dica: Sempre use a opção 7 - Salvar dados antes de fechar o programa para garantir que nada seja perdido!
-
-Versão: 1.0
+2024001;João Silva;Computação;11999999999;25;3;2024
