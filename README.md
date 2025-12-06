@@ -12,6 +12,8 @@
 
 - Salva automaticamente em arquivos .txt
 
+- Funcoes de busca
+
 **Como Usar**
 - **Compilar e Executar:**
 gcc -o biblioteca main.c
@@ -54,3 +56,4 @@ matricula;nome;curso;telefone;dia;mes;ano
 
 - **emprestimos.txt**
 codigoEmprestimo;matriculaUsuario;codigoLivro;diaE;mesE;anoE;diaD;mesD;anoD;status
+
