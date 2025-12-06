@@ -1,1 +1,4 @@
-0;matheus;engenharia de software;9999999;0;0;0
+1;Matheus Henrique;Engenharia de Software;999999999;10;1;2025
+2;Ana Souza;Direito;888888888;5;2;2024
+3;Carlos Pereira;Medicina;777777777;12;3;2023
+4;Juliana Lima;Computação;666666666;8;12;2024

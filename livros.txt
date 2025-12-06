@@ -1,4 +1,10 @@
-0;este;teste;teste;0;1829165616;0
-0;este;4;teste1\;0;1829165616;0
-0;este2;0;0;0;0;0
-1234;livro1;autorasdfa;livre;2022;5;0
+1;Clean Code;Robert C. Martin;Pearson;2008;5;0
+2;Estruturas de Dados;N. Wirth;Campus;1990;3;0
+3;O Hobbit;J.R.R. Tolkien;HarperCollins;1937;4;0
+4;Dom Casmurro;Machado de Assis;Record;1899;2;0
+5;Harry Potter e a Pedra Filosofal;J.K. Rowling;Rocco;1997;6;0
+6;A Arte da Guerra;Sun Tzu;Martin Claret;500;4;0
+7;O Pequeno Príncipe;Antoine de Saint-Exupéry;Agir;1943;5;0
+8;1984;George Orwell;Companhia das Letras;1949;3;0
+9;A Menina que Roubava Livros;Markus Zusak;Intrínseca;2005;4;0
+

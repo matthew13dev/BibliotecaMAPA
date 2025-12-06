@@ -56,6 +56,9 @@ int totalEmprestimos = 0;
 
 
 
+
+
+
 // ====== PROTÓTIPOS DAS FUNÇÕES DE ARQUIVO ======
 void salvarLivros();
 void salvarUsuarios();
@@ -65,6 +68,14 @@ void carregarLivros();
 void carregarUsuarios();
 void carregarEmprestimos();
 void carregarTudo();
+
+Livro* buscarLivroPorCodigo(int codigo);
+Livro* buscarLivroPorTitulo(char *titulo);
+Livro* buscarLivroPorAutor(char *autor);
+Livro* buscarLivroPorPalavraChave(char *palavra);
+
+void realizarDevolucao();
+
 // ===============================================
 
 
@@ -415,6 +426,92 @@ void listarEmprestimos() {
     }
 }
 
+// MENU BUSCA LIVROS
+
+void menuBuscaLivros() {
+    int opcao;
+    char texto[100];
+    int codigo;
+
+    do {
+        printf("\n=== Buscar Livros ===\n");
+        printf("1 - Buscar por codigo\n");
+        printf("2 - Buscar por titulo (exato)\n");
+        printf("3 - Buscar por autor (exato)\n");
+        printf("4 - Buscar por palavra-chave no titulo\n");
+        printf("0 - Voltar\n");
+        printf("Escolha: ");
+        scanf("%d", &opcao);
+        getchar(); // limpar buffer
+
+        Livro *l;
+
+        switch (opcao) {
+            case 1:
+                printf("Digite o codigo: ");
+                scanf("%d", &codigo);
+                l = buscarLivroPorCodigo(codigo);
+                if (l) {
+                    printf("\nEncontrado!\nCodigo: %d | Titulo: %s | Autor: %s | Ano: %d\n",
+                           l->codigo, l->titulo, l->autor, l->ano);
+                } else {
+                    printf("Nenhum livro encontrado com esse codigo.\n");
+                }
+                break;
+
+            case 2:
+                printf("Digite o titulo: ");
+                fgets(texto, 100, stdin);
+                texto[strcspn(texto, "\n")] = '\0';
+                l = buscarLivroPorTitulo(texto);
+                if (l) {
+                    printf("\nEncontrado!\nCodigo: %d | Titulo: %s | Autor: %s\n",
+                           l->codigo, l->titulo, l->autor);
+                } else {
+                    printf("Nenhum livro com esse titulo.\n");
+                }
+                break;
+
+            case 3:
+                printf("Digite o autor: ");
+                fgets(texto, 100, stdin);
+                texto[strcspn(texto, "\n")] = '\0';
+                l = buscarLivroPorAutor(texto);
+                if (l) {
+                    printf("\nEncontrado!\nTitulo: %s | Autor: %s\n",
+                           l->titulo, l->autor);
+                } else {
+                    printf("Nenhum livro com esse autor.\n");
+                }
+                break;
+
+            case 4:
+                printf("Digite palavra-chave: ");
+                fgets(texto, 100, stdin);
+                texto[strcspn(texto, "\n")] = '\0';
+                l = buscarLivroPorPalavraChave(texto);
+                if (l) {
+                    printf("\nEncontrado!\nTitulo: %s | Autor: %s\n",
+                           l->titulo, l->autor);
+                } else {
+                    printf("Nenhum livro contendo essa palavra.\n");
+                }
+                break;
+
+            case 0:
+                printf("Voltando...\n");
+                break;
+
+            default:
+                printf("Opcao invalida!\n");
+        }
+
+    } while (opcao != 0);
+}
+
+
+
+// MENU PRINCIPAL
 
 void menu() {
     int opcao;
@@ -427,6 +524,10 @@ void menu() {
         printf("4 - Listar Livros\n");
         printf("5 - Listar Usuarios\n");
         printf("6 - Listar Emprestimos\n");
+        printf("7 - Realizar Devolucao\n");
+        printf("8 - Buscar Livros\n");
+
+
         printf("0 - Sair\n");
         printf("Escolha: ");
         scanf("%d", &opcao);
@@ -438,6 +539,10 @@ void menu() {
             case 4: listarLivros(); break;
             case 5: listarUsuarios(); break;
             case 6: listarEmprestimos(); break;
+            case 7: realizarDevolucao(); break;
+            case 8: menuBuscaLivros(); break;
+
+
             case 0: 
             	salvarTudo(); // salva ao sair
 				printf("Encerrando...\n"); break;
@@ -446,6 +551,129 @@ void menu() {
 
     } while (opcao != 0);
 }
+
+
+// FUNCOES PARA BUSCAR LIVRO
+
+// Buscar livro por código
+Livro* buscarLivroPorCodigo(int codigo) {
+	int i;
+    for (i = 0; i < totalLivros; i++) {
+        if (livros[i].codigo == codigo) {
+            return &livros[i];
+        }
+    }
+    return NULL;
+}
+
+// Buscar livro por título (igual)
+Livro* buscarLivroPorTitulo(char *titulo) {
+	int i;
+    for (i = 0; i < totalLivros; i++) {
+        if (strcmp(livros[i].titulo, titulo) == 0) {
+            return &livros[i];
+        }
+    }
+    return NULL;
+}
+
+// Buscar livro por autor
+Livro* buscarLivroPorAutor(char *autor) {
+	
+	int i;
+    for (i = 0; i < totalLivros; i++) {
+        if (strcmp(livros[i].autor, autor) == 0) {
+            return &livros[i];
+        }
+    }
+    return NULL;
+}
+
+// Buscar livro contendo palavra-chave no título
+Livro* buscarLivroPorPalavraChave(char *palavra) {
+    
+	int i;
+	for (i = 0; i < totalLivros; i++) {
+        if (strstr(livros[i].titulo, palavra) != NULL) {
+            return &livros[i];
+        }
+    }
+    return NULL;
+}
+
+
+// FUNCOES PARA BUSCAR USUARIO
+
+// Buscar usuário por matrícula
+Usuario* buscarUsuarioPorMatricula(int matricula) {
+    
+	int i;
+	for (i = 0; i < totalUsuarios; i++) {
+        if (usuarios[i].matricula == matricula) {
+            return &usuarios[i];
+        }
+    }
+    return NULL;
+}
+
+// Buscar usuário por nome
+Usuario* buscarUsuarioPorNome(char *nome) {
+    
+	int i;
+	for (i = 0; i < totalUsuarios; i++) {
+        if (strcmp(usuarios[i].nome, nome) == 0) {
+            return &usuarios[i];
+        }
+    }
+    return NULL;
+}
+
+// FUNCAO PARA REALIZAR DEVOLUCAO
+
+void realizarDevolucao() {
+    int codigo;
+    printf("\n--- Devolucao de Emprestimo ---\n");
+    printf("Codigo do emprestimo: ");
+    scanf("%d", &codigo);
+
+    // procurar empréstimo
+    Emprestimo *e = NULL;
+    
+    int i;
+    for (i = 0; i < totalEmprestimos; i++) {
+        if (emprestimos[i].codigoEmprestimo == codigo) {
+            e = &emprestimos[i];
+            break;
+        }
+    }
+
+    if (e == NULL) {
+        printf("Emprestimo nao encontrado!\n");
+        return;
+    }
+
+    if (e->status == 1) {
+        printf("Este emprestimo ja foi finalizado!\n");
+        return;
+    }
+
+    // achar livro
+    Livro *l = buscarLivroPorCodigo(e->codigoLivro);
+    if (l == NULL) {
+        printf("Livro deste emprestimo nao existe mais no sistema!\n");
+    } else {
+        l->exemplares++;
+    }
+
+    // marcar como devolvido
+    e->status = 1;
+
+    salvarEmprestimos();
+    salvarLivros();
+
+    printf("\nDevolucao concluida com sucesso!\n");
+}
+
 
 
 
